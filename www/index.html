@@ -1,0 +1,175 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <meta http-equiv="Content-Security-Policy" content="default-src * data:; style-src * 'unsafe-inline'; script-src * 'unsafe-inline' 'unsafe-eval'">
+  <script src="components/loader.js"></script>
+  <script src="lib/angular/angular.min.js"></script>
+  <script src="lib/onsenui/js/onsenui.min.js"></script>
+  <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+  <script src="libs/Chart.js"></script> 
+
+  <link rel="stylesheet" href="components/loader.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
+  <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
+  <link rel="stylesheet" href="css/style.css">
+
+  <script>
+    ons.bootstrap()
+      .controller('AppController', function($scope) {
+        this.load = function(page) {
+          $scope.splitter.content.load(page);
+          $scope.splitter.left.close();
+        };
+
+        this.toggle = function() {
+          $scope.splitter.left.toggle();
+        };
+      });
+
+    ons.ready(function() {
+        console.log("Onsen UI is ready!");
+    });
+  </script>
+  
+  <script>
+    // 勤怠タブを表示したときグラフを表示する(これonsenUIじゃ使えないかも#first-pageとか)
+    document.addEventListener('init', function(event) {
+      var page = event.target;
+      if (page.matches('#first-page')) {
+        page.querySelector('#push-button').onclick = function() {
+          document.querySelector('#navigator').pushPage('page2.html');
+        };
+      } else if (page.matches('#second-page')) {
+        page.querySelector('#pop-button').onclick = function() {
+          document.querySelector('#navigator').popPage();
+        };
+  </script>
+        
+</head>
+<body>
+<!--カレンダータブとか勤怠タブとかはカルーセルで表示したい
+<ons-navigator var="myNavigator">
+    <ons-page>
+        <div class="contents">
+        
+        <ons-carousel swipeable auto-scroll class="carousel">
+                <ons-carousel-item><ons-page>"app.load('home.html')" (+ auto-scroll)</ons-page></ons-carousel-item>
+                <ons-carousel-item>"app.load('setting.html')"</ons-carousel-item>
+                <ons-carousel-item>"app.load('about.html')"</ons-carousel-item>
+            </ons-carousel>
+        </div>
+    </ons-page>
+</ons-navigator>
+-->        
+  <ons-splitter ng-controller="AppController as app" var="splitter">   <!--プロフィールはこっちのメニュー -->
+    <ons-splitter-side side="left" width="220px" collapse swipeable>
+      <ons-page>
+        <ons-list>
+          <ons-list-item ng-click="app.load('kintai.html')" tappable>
+            勤怠
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('calender.html')" tappable>
+            カレンダー
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('itiran.html')" tappable>
+            勤怠一覧
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('name.html')" tappable>
+            名前
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('about.html')" tappable>
+            About
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content page="home.html"></ons-splitter-content>
+  </ons-splitter>
+
+  <ons-template id="home.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          勤怠
+        </div>
+      </ons-toolbar>
+      <p style="text-align: center; opacity: 0.6; padding-top: 20px;">
+        Swipe right to open the menu!
+      </p>
+      <div id="canvas-holder" style="width:100%">
+      <h4>今日の業務時間内訳</h4>
+      <!-- 棒グラフの表示エリア -->
+      <canvas id="bar-chart-area" width="300" height="100">
+      </canvas>
+    </div>
+      <ons-list>
+          <ons-list-item ng-click="app.load('home.html')" tappable>
+            出社
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('settings.html')" tappable>
+            休憩
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('about.html')" tappable>  <!--alertで表示できそう-->
+            退社
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('about.html')" tappable>
+            提出
+          </ons-list-item>
+        </ons-list>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="calender.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          カレンダー
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+
+  <ons-template id="itiran.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          勤怠一覧
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="name.html">
+    <ons-page>
+        <div class="contents">
+            <ons-button ng-click="modalShow()">show</ons-button>
+            <ons-button ng-click="modalToggle()">toggle</ons-button>
+ 
+            <ons-modal var="modal">
+                <div>モーダル内容</div>
+                <ons-button ng-click="modalHide()">hide</ons-button>
+            </ons-modal>
+        </div>
+    </ons-page>
+  </ons-template>
+  
+  
+</body>
+</html>
