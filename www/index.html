@@ -66,31 +66,45 @@
   <ons-splitter ng-controller="AppController as app" var="splitter">   <!--プロフィールはこっちのメニュー -->
     <ons-splitter-side side="left" width="220px" collapse swipeable>
       <ons-page>
+      <ons-toolbar>
+          <div class="center">プロフィール</div>
+      </ons-toolbar>
         <ons-list>
-          <ons-list-item ng-click="app.load('kintai.html')" tappable>
-            勤怠
-          </ons-list-item>
-          <ons-list-item ng-click="app.load('calender.html')" tappable>
-            カレンダー
-          </ons-list-item>
-          <ons-list-item ng-click="app.load('itiran.html')" tappable>
-            勤怠一覧
-          </ons-list-item>
           <ons-list-item ng-click="app.load('name.html')" tappable>
             名前
           </ons-list-item>
-          <ons-list-item ng-click="app.load('about.html')" tappable>
-            About
+          <ons-list-item ng-click="app.load('birthday.html')" tappable>
+            誕生日
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('address.html')" tappable>
+            メールアドレス変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('teiji.html')" tappable>
+            定時変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('kyukei.html')" tappable>
+            休憩時間変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('koyou.html')" tappable>
+            雇用形態変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('password.html')" tappable>
+            パスワード変更
           </ons-list-item>
         </ons-list>
       </ons-page>
     </ons-splitter-side>
-    <ons-splitter-content page="home.html"></ons-splitter-content>
+    <ons-splitter-content page="kintai.html"></ons-splitter-content>
+    <ons-tabbar>
+  <ons-tab page="kintai.html" label="HOME" icon="fa-square" active="true"></ons-tab>
+  <ons-tab page="calender.html" label="まとめサイト(RSS)" icon="fa-square"></ons-tab>
+  <ons-tab page="itiran.html" label="勤怠管理" icon="ion-compass"></ons-tab>
+</ons-tabbar>
   </ons-splitter>
 
-  <ons-template id="home.html">
+  <ons-template id="kintai.html">
     <ons-page>
-      <ons-toolbar>
+      <ons-toolbar><!--本当はツールバーの表示は一つのテンプレートに書いたほうがSPAぽくていい-->
         <div class="left">
           <ons-toolbar-button ng-click="app.toggle()">
             <ons-icon icon="md-menu"></ons-icon>
@@ -110,16 +124,16 @@
       </canvas>
     </div>
       <ons-list>
-          <ons-list-item ng-click="app.load('home.html')" tappable>
+          <ons-list-item ng-click="app.load('kintai.html')" tappable>
             出社
           </ons-list-item>
-          <ons-list-item ng-click="app.load('settings.html')" tappable>
+          <ons-list-item ng-click="app.load('kintai.html')" tappable>
             休憩
           </ons-list-item>
-          <ons-list-item ng-click="app.load('about.html')" tappable>  <!--alertで表示できそう-->
+          <ons-list-item ng-click="app.load('kintai.html')" tappable>  <!--alertで表示できそう-->
             退社
           </ons-list-item>
-          <ons-list-item ng-click="app.load('about.html')" tappable>
+          <ons-list-item ng-click="app.load('kintai.html')" tappable>
             提出
           </ons-list-item>
         </ons-list>
@@ -158,6 +172,16 @@
   
   <ons-template id="name.html">
     <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          勤怠一覧
+        </div>
+      </ons-toolbar>
         <div class="contents">
             <ons-button ng-click="modalShow()">show</ons-button>
             <ons-button ng-click="modalToggle()">toggle</ons-button>
@@ -170,6 +194,95 @@
     </ons-page>
   </ons-template>
   
+  <ons-template id="birthday.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          誕生日入力
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="address.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          メールアドレス変更
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="teiji.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          定時入力
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="kyukei.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          規定の休憩時間入力
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="koyou.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          雇用形態変更
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="password.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          パスワード変更
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
   
 </body>
 </html>
