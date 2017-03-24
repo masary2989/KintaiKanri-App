@@ -1,0 +1,165 @@
+ <script>
+    ons.bootstrap()
+      .controller('AppController', function($scope) {
+        this.load = function(page) {
+          $scope.splitter.content.load(page);
+          $scope.splitter.left.close();
+        };
+
+        this.toggle = function() {
+          $scope.splitter.left.toggle();
+        };
+      });
+
+    ons.ready(function() {
+        console.log("Onsen UI is ready!");
+    });
+  </script>
+
+<ons-page>
+  <ons-toolbar>
+    <div class="center">
+          プロフィール
+    </div>
+  </ons-toolbar>
+        <ons-list>
+          <ons-list-item ng-click="app.load('name.html')" tappable>
+            名前
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('birthday.html')" tappable>
+            誕生日
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('address.html')" tappable>
+            メールアドレス変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('teiji.html')" tappable>
+            定時変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('kyukei.html')" tappable>
+            休憩時間変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('koyou.html')" tappable>
+            雇用形態変更
+          </ons-list-item>
+          <ons-list-item ng-click="app.load('password.html')" tappable>
+            パスワード変更
+          </ons-list-item>      
+        </ons-list>
+</ons-page>
+
+<ons-template id="name.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          勤怠一覧
+        </div>
+      </ons-toolbar>
+        <div class="contents">
+            <ons-button ng-click="modalShow()">show</ons-button>
+            <ons-button ng-click="modalToggle()">toggle</ons-button>
+ 
+            <ons-modal var="modal">
+                <div>モーダル内容</div>
+                <ons-button ng-click="modalHide()">hide</ons-button>
+            </ons-modal>
+        </div>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="birthday.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          誕生日入力
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="address.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          メールアドレス変更
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="teiji.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          定時入力
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="kyukei.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          規定の休憩時間入力
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="koyou.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          雇用形態変更
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+  
+  <ons-template id="password.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button ng-click="app.toggle()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          パスワード変更
+        </div>
+      </ons-toolbar>
+    </ons-page>
+  </ons-template>
+
+
+  
