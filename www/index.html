@@ -8,13 +8,14 @@
   <script src="lib/angular/angular.min.js"></script>
   <script src="lib/onsenui/js/onsenui.min.js"></script>
   <script src="lib/onsenui/js/angular-onsenui.min.js"></script>
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="tinytools.progressbar.min.js"></script>
   <script src="libs/Chart.js"></script> 
 
   <link rel="stylesheet" href="components/loader.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsenui.css">
   <link rel="stylesheet" href="lib/onsenui/css/onsen-css-components.css">
   <link rel="stylesheet" href="css/style.css">
-
   <script src="js/controller/controller.js"></script>
 </head>
 
@@ -36,7 +37,7 @@
   </ons-template>
 
   <ons-template id="kintai.html">
-    <ons-page>
+    <ons-page id="breakdown">
       <ons-toolbar><!--本当はツールバーの表示は一つのテンプレートに書いたほうがSPAぽくていい-->
         <div class="left">
           <ons-toolbar-button ng-click="app.toggle()">
@@ -52,21 +53,23 @@
       </p>
       <div id="canvas-holder" style="width:100%">
       <h4>今日の業務時間内訳</h4>
+      <!-- 業務時間内訳表示エリア -->
+      <p id="worktime">
+      </p>
+      <p id="breaktime">
+      </p>
       <!-- 棒グラフの表示エリア -->
       <canvas id="bar-chart-area" width="300" height="100">
       </canvas>
     </div>
       <ons-list>
-          <ons-list-item ng-click="app.load('tabbar.html')" tappable>
-            出社
-          </ons-list-item>
-          <ons-list-item ng-click="app.load('tabbar.html')" tappable>
-            休憩
-          </ons-list-item>
-          <ons-list-item ng-click="app.load('tabbar.html')" tappable>  <!--alertで表示できそう-->
+      <ons-button id="syusya" modifier="material" ng-click="app.buttonManager(1)">出社</ons-button>
+      <br />
+      <ons-button id="kyukei" modifier="material" ng-click="app.buttonManager(2)">休憩</ons-button>
+          <ons-list-item ng-click="app.buttonManager(3)" tappable>  <!--alertで表示できそう-->
             退社
           </ons-list-item>
-          <ons-list-item ng-click="app.load('tabbar.html')" tappable>
+          <ons-list-item ng-click="app.buttonManager(4)" tappable>
             提出
           </ons-list-item>
         </ons-list>
